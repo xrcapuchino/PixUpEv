@@ -93,6 +93,37 @@ public class DiscoJDBCImpl extends Conexion<Disco> implements DiscoJDBC
             preparedStatement.setFloat(4,disco.getDescuento());
             preparedStatement.setObject(5,disco.getFecha());
             preparedStatement.setString(6,disco.getImagen());
+            preparedStatement.setInt(7,disco.getArtista().getId());
+            preparedStatement.setInt(8,disco.getDisquera().getId());
+            preparedStatement.setInt(9,disco.getGenero().getId());
+            res=preparedStatement.executeUpdate();
+            preparedStatement.close();
+            closeConnection();
+            return res==1;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean savetest(Disco disco)
+    {
+        int res=0;
+        PreparedStatement preparedStatement=null;
+        String query="INSERT INTO DISCO (titulo,precio,existencia,descuento,fecha_lanzamiento,imagen,id_artista,id_disquera,id_genero_musical) values (?,?,?,?,?,?,?,?,?);";
+        try {
+            if(!openConnection()){
+                System.out.println("Error en la conexion");
+                return false;
+            }
+            preparedStatement= connection.prepareStatement(query);
+            preparedStatement.setString(1,disco.getTitulo());
+            preparedStatement.setFloat(2,disco.getPrecio());
+            preparedStatement.setInt(3,disco.getExistencia());
+            preparedStatement.setFloat(4,disco.getDescuento());
+            preparedStatement.setObject(5,disco.getFecha());
+            preparedStatement.setString(6,disco.getImagen());
             preparedStatement.setInt(7,disco.getArtista_id());
             preparedStatement.setInt(8,disco.getDisquera_id());
             preparedStatement.setInt(9,disco.getGenero_id());
@@ -109,6 +140,40 @@ public class DiscoJDBCImpl extends Conexion<Disco> implements DiscoJDBC
 
     @Override
     public boolean update(Disco disco) {
+        int res=0;
+        PreparedStatement preparedStatement=null;
+        String query = "UPDATE DISCO SET titulo=?, precio=?, existencia=?, descuento=?, fecha_lanzamiento=?, imagen=?, id_artista=?, id_disquera=?, id_genero_musical=? WHERE id=?";
+        try {
+            if (!openConnection())
+            {
+                System.out.println("Error en la conexion");
+                return false;
+            }
+            preparedStatement= connection.prepareStatement(query);
+            preparedStatement.setString(1,disco.getTitulo());
+            preparedStatement.setFloat(2,disco.getPrecio());
+            preparedStatement.setInt(3,disco.getExistencia());
+            preparedStatement.setFloat(4,disco.getDescuento());
+            preparedStatement.setObject(5,disco.getFecha());
+            preparedStatement.setString(6,disco.getImagen());
+            preparedStatement.setInt(7,disco.getArtista().getId());
+            preparedStatement.setInt(8,disco.getDisquera().getId());
+            preparedStatement.setInt(9,disco.getGenero().getId());
+            preparedStatement.setInt(10,disco.getId());
+            res=preparedStatement.executeUpdate();
+            preparedStatement.close();
+            closeConnection();
+            return res==1;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updatetest(Disco disco) {
         int res=0;
         PreparedStatement preparedStatement=null;
         String query = "UPDATE DISCO SET titulo=?, precio=?, existencia=?, descuento=?, fecha_lanzamiento=?, imagen=?, id_artista=?, id_disquera=?, id_genero_musical=? WHERE id=?";

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Time;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CancionJDBCImplTest {
@@ -37,10 +38,10 @@ class CancionJDBCImplTest {
         Cancion cancion = new Cancion();
         boolean res = false;
         CancionJDBC cancionJDBC = CancionJDBCImpl.getInstance();
-        cancion.setTitulo("Thriller");
-        cancion.setDuracion(Time.valueOf("00:02:32"));
-        cancion.setDisco_id(2);
-        res = cancionJDBC.save(cancion);
+        cancion.setTitulo("yolo");
+        cancion.setDuracion(Time.valueOf("00:03:53"));
+        cancion.setDisco_id(1);
+        res = cancionJDBC.savetest(cancion);
         assertEquals(true, res);
     }
 
@@ -48,12 +49,12 @@ class CancionJDBCImplTest {
     void update() {
         Cancion cancion = new Cancion();
         boolean res = false;
-        cancion.setTitulo("helo");
-        cancion.setDuracion(Time.valueOf("00:05:32"));
-        cancion.setDisco_id(2);
-        cancion.setId(2);
+        cancion.setTitulo("why");
+        cancion.setDuracion(Time.valueOf("00:01:53"));
+        cancion.setDisco_id(1);
+        cancion.setId(1);
         CancionJDBC cancionJDBC = CancionJDBCImpl.getInstance();
-        res = cancionJDBC.update(cancion);
+        res = cancionJDBC.updatetest(cancion);
         assertEquals(true, res);
     }
 }

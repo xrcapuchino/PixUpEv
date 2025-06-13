@@ -6,7 +6,6 @@ import org.Vázquez.Rojas.Diego.Alejandro.gui.model.disco.DiscoJDBCImpl;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,7 +46,7 @@ class DiscoJDBCImplTest {
         disco.setArtista_id(1);
         disco.setDisquera_id(1);
         disco.setGenero_id(2);
-        res = discoJDBC.save(disco);
+        res = discoJDBC.savetest(disco);
         assertEquals(true, res);
     }
 
@@ -66,7 +65,7 @@ class DiscoJDBCImplTest {
         disco.setDisquera_id(1);
         disco.setGenero_id(2);
         disco.setId(2);
-        res = discoJDBC.update(disco);
+        res = discoJDBC.updatetest(disco);
         assertEquals(true, res);
     }
 }

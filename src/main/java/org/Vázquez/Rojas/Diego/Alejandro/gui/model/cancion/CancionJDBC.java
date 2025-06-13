@@ -8,5 +8,7 @@ public interface CancionJDBC {
     Cancion findById(Integer id);
     boolean save(Cancion cancion);
     boolean update(Cancion cancion);
+    boolean savetest(Cancion cancion);
+    boolean updatetest(Cancion cancion);
     boolean delete(Cancion cancion);
 }

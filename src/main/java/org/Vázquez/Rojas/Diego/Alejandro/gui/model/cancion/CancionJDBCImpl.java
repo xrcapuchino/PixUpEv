@@ -79,6 +79,31 @@ public class CancionJDBCImpl extends Conexion<Cancion> implements CancionJDBC
             preparedStatement= connection.prepareStatement(query);
             preparedStatement.setString(1,cancion.getTitulo());
             preparedStatement.setTime(2,cancion.getDuracion());
+            preparedStatement.setInt(3,cancion.getDisco().getId());
+            res=preparedStatement.executeUpdate();
+            preparedStatement.close();
+            closeConnection();
+            return res==1;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    @Override
+    public boolean savetest(Cancion cancion)
+    {
+        int res=0;
+        PreparedStatement preparedStatement=null;
+        String query="INSERT INTO CANCION(titulo,duracion,disco_id) values(?,?,?);";
+        try {
+            if(!openConnection()){
+                System.out.println("Error en la conexion");
+                return false;
+            }
+            preparedStatement= connection.prepareStatement(query);
+            preparedStatement.setString(1,cancion.getTitulo());
+            preparedStatement.setTime(2,cancion.getDuracion());
             preparedStatement.setInt(3,cancion.getDisco_id());
             res=preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -93,6 +118,32 @@ public class CancionJDBCImpl extends Conexion<Cancion> implements CancionJDBC
 
     @Override
     public boolean update(Cancion cancion) {
+        int res=0;
+        PreparedStatement preparedStatement=null;
+        String query = "UPDATE CANCION SET titulo=?, duracion=?, disco_id=? WHERE id=?";
+        try {
+            if (!openConnection())
+            {
+                System.out.println("Error en la conexion");
+                return false;
+            }
+            preparedStatement= connection.prepareStatement(query);
+            preparedStatement.setString(1,cancion.getTitulo());
+            preparedStatement.setTime(2,cancion.getDuracion());
+            preparedStatement.setInt(3,cancion.getDisco_id());
+            preparedStatement.setInt(4,cancion.getDisco().getId());
+            res=preparedStatement.executeUpdate();
+            preparedStatement.close();
+            closeConnection();
+            return res==1;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean updatetest(Cancion cancion) {
         int res=0;
         PreparedStatement preparedStatement=null;
         String query = "UPDATE CANCION SET titulo=?, duracion=?, disco_id=? WHERE id=?";
